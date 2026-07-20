@@ -15,14 +15,8 @@ void main() {
     );
 
     try {
-      final isValid = await validateSkills(
-        skillDirPaths: ['../.agents/skills'],
-        resolvedRules: {
-          'check-relative-paths': AnalysisSeverity.error,
-          'check-absolute-paths': AnalysisSeverity.error,
-          'check-trailing-whitespace': AnalysisSeverity.error,
-        },
-      );
+      final config = await ConfigParser.loadConfig();
+      final isValid = await validateSkills(config: config);
       expect(
         isValid,
         isTrue,
